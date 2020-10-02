@@ -1,0 +1,48 @@
+
+<div class="container">
+  <div>
+    <strong class="mr-5"> <%= @tweet.user.name %> </strong>
+    <%= image_tag @tweet.user.image_url, style: 'height:200px;width:200px;' %>
+  </div>
+  <div class="mt-5">
+    <strong >Content:</strong>
+    <%= @tweet.content %>
+  </div>
+</div>
+<hr>
+<div class = "container">
+  <table>
+    <thead>
+      <tr>
+        <th>Liked by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @likes.each do |like| %>
+        <tr>
+          <td><%= image_tag like.user.image_url, style: 'height:200px;width:200px;'%> <%= like.user.name%> 
+          
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="container mt-5">
+  <%if current_user.present?%>
+    <% if current_user.id == @tweet.user_id %>
+      <td><%= link_to 'Edit', edit_tweet_path(@tweet) %></td> |
+      <td><%= link_to 'Destroy', @tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td> |
+      <%= link_to 'Back', tweets_path %>
+    <% else %>
+      <%= link_to 'Back', tweets_path %> 
+    <% end %>
+    
+  <% else %>
+    <%= link_to 'Back', tweets_path %> 
+  <% end %>
+
+
+  
+</div>
