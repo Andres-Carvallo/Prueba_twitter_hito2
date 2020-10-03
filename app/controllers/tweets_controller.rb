@@ -1,5 +1,6 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like]
+  require 'json'
 
   # GET /tweets
   # GET /tweets.json
@@ -33,6 +34,22 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user = current_user
+    @tweet.content = @tweet.content.split(" ").map(&:to_s)
+    @array_cont = JSON.parse(@tweet.content)
+    @array_cont.each do |hash|
+      if hash.include?('#')
+        @name_link = hash.remove("#")
+        @hash_tag_link = "https://twitter.com/hashtag/#{@name_link}?src=hashtag_click"
+        @array_cont[@array_cont.index(hash)] = (helpers.link_to hash, @hash_tag_link)
+        @tweet.content = @array_cont.join(' ')
+      else
+        @new_cont = @array_cont.join(' ')
+        @tweet.content = @new_cont
+      end
+      
+    end
+
+
 
     respond_to do |format|
       if @tweet.save
