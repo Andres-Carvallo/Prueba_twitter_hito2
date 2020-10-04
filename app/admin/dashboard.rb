@@ -8,15 +8,15 @@ ActiveAdmin.register_page "Dashboard" do
         small I18n.t("active_admin.dashboard_welcome.call_to_action")
       end
     end
-
+    
     # Here is an example of a simple dashboard with columns and panels.
-    #
+    # #
     # columns do
     #   column do
-    #     panel "Recent Posts" do
+    #     panel "Recent tweets" do
     #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
+    #         Tweet.all.map do |tweet|
+    #           li link_to(tweet.content, admin_tweet_path(tweet))
     #         end
     #       end
     #     end

@@ -9,6 +9,12 @@ class TweetsController < ApplicationController
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
     @new_tweet = Tweet.new
     @like = Like.new
+
+    if params[:content]
+      send_data(render_to_string, :filename => "tweet.html", :type => "text/html")
+    else
+      # render normally
+    end
   
   end
 
