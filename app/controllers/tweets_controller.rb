@@ -10,12 +10,7 @@ class TweetsController < ApplicationController
     @new_tweet = Tweet.new
     @like = Like.new
 
-    if params[:content]
-      send_data(render_to_string, :filename => "tweet.html", :type => "text/html")
-    else
-      # render normally
-    end
-  
+
   end
 
   # GET /tweets/1
