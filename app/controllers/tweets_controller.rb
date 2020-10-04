@@ -79,6 +79,11 @@ class TweetsController < ApplicationController
   # DELETE /tweets/1
   # DELETE /tweets/1.json
   def destroy
+    @tweet_id = @tweet.id 
+    @likes = Like.where(tweet_id: @tweet_id)
+    @likes.each do |like|
+      like.destroy
+    end
     @tweet.destroy
     respond_to do |format|
       format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
@@ -105,7 +110,6 @@ class TweetsController < ApplicationController
     def set_tweet
       @tweet = Tweet.find(params[:id])
     end
-    
 
 
     # Only allow a list of trusted parameters through.
