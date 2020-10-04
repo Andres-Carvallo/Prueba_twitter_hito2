@@ -2,7 +2,7 @@
 <div class="container">
   <div>
     <strong class="mr-5"> <%= @tweet.user.name %> </strong>
-    <%= image_tag @tweet.user.image_url, style: 'height:200px;width:200px;' %>
+    <%= image_tag @tweet.user.avatar_url, style: 'height:200px;width:200px;' %>
   </div>
   <div class="mt-5">
     <strong >Content:</strong>
@@ -20,7 +20,7 @@
     <tbody>
       <% @likes.each do |like| %>
         <tr>
-          <td><%= image_tag like.user.image_url, style: 'height:200px;width:200px;'%> <%= like.user.name%> 
+          <td><%= image_tag like.user.avatar_url, style: 'height:200px;width:200px;'%> <%= like.user.name%> 
           
           </td>
         </tr>

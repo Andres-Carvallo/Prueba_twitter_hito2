@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
 
-  resources :likes
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+  devise_for :users
+  # devise_for :users, controllers: {
+  #   sessions: 'users/sessions'
+  # }
   resources :tweets do
     resources :likes
   end

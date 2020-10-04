@@ -95,7 +95,7 @@ class TweetsController < ApplicationController
     @user = current_user.id
     @tweet = params[:id]
     @content = params[:content]
-    rt_params = {user_id: @user, content: @content, retweet_id: @tweet}
+    rt_params = {user_id: @user, content: @content, origin_tweet: @tweet}
     @rt = Tweet.create(rt_params)
     @rt.save!
     redirect_to root_path

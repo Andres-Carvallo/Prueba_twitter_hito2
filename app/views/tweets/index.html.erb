@@ -39,7 +39,7 @@
       <% @tweets.each do |tweet| %>
         <tr>
           <td><div class="mt-3">
-                <div><%= image_tag tweet.user.image_url, style: 'height:200px;width:200px;'%></div> 
+                <div><%= image_tag tweet.user.avatar_url, style: 'height:200px;width:200px;'%></div> 
                 <div class="mt-1 text-center"><%= tweet.user.name %></div>
               </div>
               </td>

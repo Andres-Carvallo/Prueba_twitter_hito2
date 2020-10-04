@@ -13,7 +13,7 @@ User.delete_all
 
 
 50.times do
-  User.create([{ name: Faker::Name.name, email: Faker::Internet.email, image_url: Faker::LoremPixel.image,  password:"123456" ,password_confirmation:"123456" }])
+  User.create([{ name: Faker::Name.name, email: Faker::Internet.email, avatar_url: Faker::LoremPixel.image,  password:"123456" ,password_confirmation:"123456" }])
 end
 
 100.times do
