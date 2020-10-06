@@ -17,4 +17,8 @@ class User < ApplicationRecord
     end
     acc
   end
+
+ 
+
+  
 end

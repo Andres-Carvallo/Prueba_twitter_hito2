@@ -13,10 +13,17 @@ class TweetsController < ApplicationController
     
     if current_user.present?
       @friend_tweets = Tweet.where( :user_id => current_user.friends).page(params[:page]).per(50)
+
+    # friend_list = current_user.friends
+    # tweets_of_friend_list = friend_list.tweets_for_me ((PROBANDO EL SCOPE tweets_for_me))
+
     end
 
 
+
   end
+
+
 
 
 
