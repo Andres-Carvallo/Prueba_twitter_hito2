@@ -17,6 +17,9 @@ ActiveAdmin.register User do
   index do
     selectable_column
     id_column
+    column :Friend_following_count do |user|
+      columns user.friends.count 
+    end
     column :Tweet_count do |user|
       columns user.tweets.count 
     end

@@ -10,7 +10,14 @@ class TweetsController < ApplicationController
     @new_tweet = Tweet.new
     @like = Like.new
     @friends = Friend.all
+    
+    if current_user.present?
+      @friend_tweets = Tweet.where( :user_id => current_user.friends).page(params[:page]).per(50)
+    end
+
+
   end
+
 
 
   # GET /tweets/1
@@ -19,6 +26,12 @@ class TweetsController < ApplicationController
     @tweet_id = @tweet.id 
     @likes = Like.where(tweet_id: @tweet_id)
   end
+
+
+
+
+  
+
 
 
   # GET /tweets/new
