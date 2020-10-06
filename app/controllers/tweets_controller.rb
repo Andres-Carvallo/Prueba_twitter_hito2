@@ -16,7 +16,6 @@ class TweetsController < ApplicationController
 
     # friend_list = current_user.friends
     # tweets_of_friend_list = friend_list.tweets_for_me ((PROBANDO EL SCOPE tweets_for_me))
-
     end
 
 

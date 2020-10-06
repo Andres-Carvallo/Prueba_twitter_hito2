@@ -105,7 +105,7 @@
         </tr>
       </thead>
       <tbody>
-        <% tweets.each do |tweet| %>
+        <% @tweets.each do |tweet| %>
           <tr>
             <td><div class="mt-3">
                   <div><%= image_tag tweet.user.avatar_url, style: 'height:200px;width:200px;'%></div> 
