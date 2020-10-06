@@ -9,9 +9,9 @@ class TweetsController < ApplicationController
     @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
     @new_tweet = Tweet.new
     @like = Like.new
-
-
+    @friends = Friend.all
   end
+
 
   # GET /tweets/1
   # GET /tweets/1.json
@@ -47,8 +47,9 @@ class TweetsController < ApplicationController
         @new_cont = @array_cont.join(' ')
         @tweet.content = @new_cont
       end
-      
     end
+
+  
 
 
 
