@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
 
     
     if current_user.present?
-      @friend_tweets = Tweet.where( :user_id => current_user.friends).page(params[:page]).per(50)
+      
       @q = Tweet.where( :user_id => current_user.friends).ransack(params[:q])
       @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
       @new_tweet = Tweet.new
