@@ -5,17 +5,23 @@ class TweetsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @q = Tweet.ransack(params[:q])
-    @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
-    @new_tweet = Tweet.new
-    @like = Like.new
-    @friends = Friend.all
+
     
     if current_user.present?
       @friend_tweets = Tweet.where( :user_id => current_user.friends).page(params[:page]).per(50)
-
+      @q = Tweet.where( :user_id => current_user.friends).ransack(params[:q])
+      @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
+      @new_tweet = Tweet.new
+      @like = Like.new
+      @friends = Friend.all
     # friend_list = current_user.friends
     # tweets_of_friend_list = friend_list.tweets_for_me ((PROBANDO EL SCOPE tweets_for_me))
+    else 
+      @q = Tweet.ransack(params[:q])
+      @tweets = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(50)
+      @new_tweet = Tweet.new
+      @like = Like.new
+      @friends = Friend.all
     end
 
 
