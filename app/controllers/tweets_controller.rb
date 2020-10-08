@@ -1,4 +1,6 @@
 class TweetsController < ApplicationController
+  # include ActionController::HttpAuthentication::Basic::ControllerMethods
+  # http_basic_authenticate_with name: "andres", password: "123456", except: :index
   before_action :set_tweet, only: [:show, :edit, :update, :destroy, :like]
   require 'json'
 

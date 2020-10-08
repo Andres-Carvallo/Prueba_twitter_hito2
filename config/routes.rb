@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   resources :friends
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -11,6 +12,11 @@ Rails.application.routes.draw do
   resources :tweets do
     resources :likes
   end
+
+  resources :api do
+    :new
+  end
+  
 
   post "/tweets/retweet" => "tweets#retweet", :as => :retweet
 
