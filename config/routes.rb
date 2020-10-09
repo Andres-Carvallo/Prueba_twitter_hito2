@@ -12,12 +12,11 @@ Rails.application.routes.draw do
   resources :tweets do
     resources :likes
   end
-
+  get '/api/new' => 'api#new'
   resources :api do
-    :new
+    resources :news   
   end
   
-
   post "/tweets/retweet" => "tweets#retweet", :as => :retweet
 
   root "tweets#index"
