@@ -18,13 +18,20 @@ end
 
 100.times do
     user = rand(50)
+    tweet = rand(50)
     Tweet.create([{ content: Faker::Lorem.paragraph, user_id: user}])
+    
 end
 
 50.times do
   user = rand(50)
   tweet = rand(100)
   Friend.create([{ user_id: user, friend_id: tweet }])
+end
+
+100.times do
+  user = rand(50)
+  Friend.create([{ user_id: user}])
 end
 
 

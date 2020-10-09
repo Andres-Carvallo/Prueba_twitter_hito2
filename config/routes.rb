@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     resources :news   
   end
   
+
+  get '/api/:fecha1/:fecha2' => 'api#tweet_filter'
+
   post "/tweets/retweet" => "tweets#retweet", :as => :retweet
 
   root "tweets#index"
