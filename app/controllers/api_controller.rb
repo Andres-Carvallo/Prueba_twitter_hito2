@@ -1,7 +1,8 @@
 class ApiController < InheritedResources::Base
   include ActionController::HttpAuthentication::Basic::ControllerMethods
-  protect_from_forgery with: :null_session
-  http_basic_authenticate_with name: "hello", password: "world", :except => ["new", "tweet_filter"] 
+  
+  http_basic_authenticate_with name: "hello", password: "world", :except => ["new", "tweet_filter"]
+  protect_from_forgery with: :null_session 
   require 'json'
   require 'date'
 
@@ -60,7 +61,8 @@ class ApiController < InheritedResources::Base
   end
 
   def create
-    @tweet = Tweet.new(tweet_params)
+    @tweet = Tweet.create(tweet_params)
+    @tweet.save
     render json: @tweet
   end
     
