@@ -36,11 +36,11 @@ class ApiController < InheritedResources::Base
     @friends = Friend.all
     @users = User.all
     @tweet_api = []
-    @retweet_user_list = []
+    
     
     @tweets.each do |tweet|
       @tweets_likes = Like.where(:tweet_id  => tweet.id)
-      @tweet_retweet = Tweet.where(:origin_tweet => tweet.id)
+      @tweet_retweet = Tweet.where(:id => tweet.origin_tweet)
 
       @tweet_hash = {"id" => tweet.id}
       @tweet_hash.merge!("content"=> tweet.content)
@@ -49,15 +49,15 @@ class ApiController < InheritedResources::Base
       @tweet_hash.merge!("retweets_count"=> @tweet_retweet.count)
       if @tweet_retweet.first == nil
         @tweet_retweet = 0
-        @tweet_hash.merge!("rewtitted_form"=> @tweet_retweet)
+        @tweet_hash.merge!("retwitted_from"=> @tweet_retweet)
       else
         @tweet_retweet.each do |rt|
-          @retweet_user_list << rt.user_id
+          @retweet_user_list = rt.id
         end
-        @tweet_hash.merge!("rewtitted_from"=> @retweet_user_list)
+        @tweet_hash.merge!("retwitted_from"=> @retweet_user_list)
         
       end
-      
+
       @tweet_api << (@tweet_hash)
 
 
