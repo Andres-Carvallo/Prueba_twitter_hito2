@@ -35,6 +35,8 @@ end
 end
 
 
+Tweet.create([{ content: Faker::Lorem.paragraph, user_id: 1, origin_tweet: 2}])
+Tweet.create([{ content: Faker::Lorem.paragraph, user_id: 2, origin_tweet: 2}])
 
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

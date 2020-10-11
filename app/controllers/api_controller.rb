@@ -34,25 +34,37 @@ class ApiController < InheritedResources::Base
   def news
     @tweets = Tweet.all
     @friends = Friend.all
+    @users = User.all
     @tweet_api = []
-    @retweet_list = Tweet.where.not(:origin_tweet => nil)
-
+    @retweet_user_list = []
+    
     @tweets.each do |tweet|
       @tweets_likes = Like.where(:tweet_id  => tweet.id)
       @tweet_retweet = Tweet.where(:origin_tweet => tweet.id)
-      @retweets_from = Friend.where(:user_id => @retweet_list)
 
       @tweet_hash = {"id" => tweet.id}
       @tweet_hash.merge!("content"=> tweet.content)
       @tweet_hash.merge!("user_id"=> tweet.user_id)
       @tweet_hash.merge!("like_count"=> @tweets_likes.count)
       @tweet_hash.merge!("retweets_count"=> @tweet_retweet.count)
-      @tweet_hash.merge!("rewtitted_form"=> @retweets_from.count)
-      @tweet_api << (@tweet_hash)
+      if @tweet_retweet.first == nil
+        @tweet_retweet = 0
+        @tweet_hash.merge!("rewtitted_form"=> @tweet_retweet)
+      else
+        @tweet_retweet.each do |rt|
+          @retweet_user_list << rt.user_id
+        end
+        @tweet_hash.merge!("rewtitted_from"=> @retweet_user_list)
+        
+      end
       
+      @tweet_api << (@tweet_hash)
+
+
     end
-    @final_api_tweet = @tweet_api.last(50)
+    @final_api_tweet = @tweet_api
     render :json => @final_api_tweet
+   
   end
 
   respond_to do |format|
