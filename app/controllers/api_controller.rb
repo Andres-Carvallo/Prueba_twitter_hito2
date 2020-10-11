@@ -13,19 +13,27 @@ class ApiController < InheritedResources::Base
 
 
     @tweets = Tweet.date_filter(start_time, end_time)
-    @friends = Friend.all
     @filter_api = []
     @retweet_list = Tweet.where.not(:origin_tweet => nil)
     @tweets.each do |tweet|
       @tweets_likes = Like.where(:tweet_id  => tweet.id)
       @tweet_retweet = Tweet.where(:origin_tweet => tweet.id)
-      @retweets_from = Friend.where(:user_id => @retweet_list)
+      @retweet_from = Tweet.where(:id => tweet.origin_tweet)
       @tweet_hash = {"id" => tweet.id}
       @tweet_hash.merge!("content"=> tweet.content)
       @tweet_hash.merge!("user_id"=> tweet.user_id)
       @tweet_hash.merge!("like_count"=> @tweets_likes.count)
       @tweet_hash.merge!("retweets_count"=> @tweet_retweet.count)
-      @tweet_hash.merge!("rewtitted_form"=> @retweets_from.count)
+      if @retweet_from.first == nil
+        @retweet_from = 0
+        @tweet_hash.merge!("retwitted_from"=> @retweet_from)
+      else
+        @retweet_from.each do |rt|
+          @retweet_user_list = rt.id
+        end
+        @tweet_hash.merge!("retwitted_from"=> @retweet_user_list)
+        
+      end
       @filter_api << (@tweet_hash)
     end
     render :json => @filter_api
@@ -40,18 +48,19 @@ class ApiController < InheritedResources::Base
     
     @tweets.each do |tweet|
       @tweets_likes = Like.where(:tweet_id  => tweet.id)
-      @tweet_retweet = Tweet.where(:id => tweet.origin_tweet)
+      @tweet_retweet = Tweet.where(:origin_tweet => tweet.id)
+      @retweet_from = Tweet.where(:id => tweet.origin_tweet)
 
       @tweet_hash = {"id" => tweet.id}
       @tweet_hash.merge!("content"=> tweet.content)
       @tweet_hash.merge!("user_id"=> tweet.user_id)
       @tweet_hash.merge!("like_count"=> @tweets_likes.count)
       @tweet_hash.merge!("retweets_count"=> @tweet_retweet.count)
-      if @tweet_retweet.first == nil
-        @tweet_retweet = 0
-        @tweet_hash.merge!("retwitted_from"=> @tweet_retweet)
+      if @retweet_from.first == nil
+        @retweet_from = 0
+        @tweet_hash.merge!("retwitted_from"=> @retweet_from)
       else
-        @tweet_retweet.each do |rt|
+        @retweet_from.each do |rt|
           @retweet_user_list = rt.id
         end
         @tweet_hash.merge!("retwitted_from"=> @retweet_user_list)
