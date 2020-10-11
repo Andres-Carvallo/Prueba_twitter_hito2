@@ -2,7 +2,7 @@
 
 Link Heroku
 
-Link: https://evening-retreat-64677.herokuapp.com/
+https://evening-retreat-64677.herokuapp.com/
 
 URL Api_post: http://localhost:3000/api.json
 
