@@ -62,7 +62,7 @@ class ApiController < InheritedResources::Base
 
 
     end
-    @final_api_tweet = @tweet_api
+    @final_api_tweet = @tweet_api.last(50)
     render :json => @final_api_tweet
    
   end
