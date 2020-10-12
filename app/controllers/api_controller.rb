@@ -3,11 +3,11 @@ class ApiController < InheritedResources::Base
   http_basic_authenticate_with name: "hello", password: "world", :except => ["news", "tweet_filter"]
   protect_from_forgery with: :null_session 
   require 'json'
-  require 'date'
+
 
   def tweet_filter
-    start_time = (params[:fecha1]).to_date
-    end_time = (params[:fecha2]).to_date
+    start_time = (params[:fecha1])
+    end_time = (params[:fecha2])
 
 
 
