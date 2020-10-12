@@ -94,7 +94,7 @@ class ApiController < InheritedResources::Base
   end
 
   def tweet_params
-    params.require(:tweet).permit(:content, :user_id, :tweet_id)
+    params.require(:tweet).permit(:content, :user_id, :origin_tweet)
   end
 
 end
