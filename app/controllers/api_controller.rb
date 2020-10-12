@@ -1,6 +1,5 @@
 class ApiController < InheritedResources::Base
   include ActionController::HttpAuthentication::Basic::ControllerMethods
-  
   http_basic_authenticate_with name: "hello", password: "world", :except => ["news", "tweet_filter"]
   protect_from_forgery with: :null_session 
   require 'json'

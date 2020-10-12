@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get '/api/news' => 'api#news'
   get '/api/:fecha1/:fecha2' => 'api#tweet_filter'
-  post "/tweets/retweet" => "tweets#retweet", :as => :retweet
+  post '/api', action: :create, controller: 'api'
 
   root "tweets#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
